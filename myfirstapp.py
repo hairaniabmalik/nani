@@ -1,48 +1,49 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
-import time
+from sklearn import datasets
+from sklearn.ensemble import RandomForestClassifier
 
-st.header("My first Streamlit App")
+st.write("""
+# Simple Iris Flower Prediction App
 
-option = st.sidebar.selectbox(
-    'Select a mini project',
-     ['line chart','map','T n C', 'Long Process'])
+This app predicts the **Iris flower** type!
+""")
 
-if option=='line chart':
-    chart_data = pd.DataFrame(
-    np.random.randn(20, 3),
-    columns=['a', 'b', 'c'])
+st.sidebar.header('User Input Parameters')
 
-    st.line_chart(chart_data)
+def user_input_features():
+    TV = st.sidebar.slider('TV', 1.0, 150.0, 300.0)
+    Radio = st.sidebar.slider('Radio', 1.0, 25.0, 50.0)
+    Newspaper = st.sidebar.slider('Newspaper', 1.0, 35.0, 70.0)
+    Sales = st.sidebar.slider('Sales', 1.0, 15.0, 30.0)
+    data = {'TV': TV,
+            'Radio': Radio,
+            'Newspaper': Newspaper,
+            'Sales': Sales}
+    features = pd.DataFrame(data, index=[0])
+    return features
 
-elif option=='map':
-    map_data = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-    columns=['lat', 'lon'])
+df = user_input_features()
 
-    st.map(map_data)
+st.subheader('Advertising Input parameters')
+st.write(df)
 
-elif option=='T n C':
-    st.write('Before you continue, please read the [terms and conditions](https://www.gnu.org/licenses/gpl-3.0.en.html)')
-    show = st.checkbox('I agree the terms and conditions')
-    if show:
-        st.write(pd.DataFrame({
-        'Intplan': ['yes', 'yes', 'yes', 'no'],
-        'Churn Status': [0, 0, 0, 1]
-        }))
+advertising = datasets.load_iris()
+X = advertising.data
+Y = advertising.target
 
-else:
-    'Starting a long computation...'
-    
-    latest_iteration = st.empty()
-    bar = st.progress(0)
+clf = RandomForestClassifier()
+clf.fit(X, Y)
 
-    for i in range(100):
-   
-        latest_iteration.text(f'Iteration {i+1}')
-        bar.progress(i + 1)
-        time.sleep(0.1)
-        
-        
-    '...and now we\'re done!'
+prediction = clf.predict(df)
+prediction_proba = clf.predict_proba(df)
+
+st.subheader('Class labels and their corresponding index number')
+st.write(iris.target_names)
+
+st.subheader('Prediction')
+st.write(iris.target_names[prediction])
+#st.write(prediction)
+
+st.subheader('Prediction Probability')
+st.write(prediction_proba)
