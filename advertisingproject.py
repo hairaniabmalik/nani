@@ -12,10 +12,10 @@ This app predicts the **Iris flower** type!
 st.sidebar.header('User Input Parameters')
 
 def user_input_features():
-    TV = st.sidebar.slider('TV', 1.0, 150.0, 300.0)
-    Radio = st.sidebar.slider('Radio', 1.0, 25.0, 50.0)
-    Newspaper = st.sidebar.slider('Newspaper', 1.0, 35.0, 70.0)
-    Sales = st.sidebar.slider('Sales', 1.0, 15.0, 30.0)
+    TV = st.sidebar.slider('TV', 1.0, 300.0, 150.0)
+    Radio = st.sidebar.slider('Radio', 1.0, 50.0, 25.0)
+    Newspaper = st.sidebar.slider('Newspaper', 1.0, 70.0, 35.0)
+    Sales = st.sidebar.slider('Sales', 1.0, 30.0, 15.0)
     data = {'TV': TV,
             'Radio': Radio,
             'Newspaper': Newspaper,
