@@ -17,9 +17,9 @@ if show:
     'Churn Status': [0, 0, 0, 1]
 
 st.sidebar.header('Advertising method')     
-     option = st.sidebar.selectbox(
+    option = st.sidebar.selectbox(
     'Select a mini project',
-     ['TV','Radio','Newspaper','Sales'])
+    ['TV','Radio','Newspaper','Sales'])
 
 def user_input_features():
     TV = st.sidebar.slider('TV', 1.0, 300.0, 150.0)
