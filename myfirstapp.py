@@ -1,12 +1,13 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import time
 
 st.header("My first Streamlit App")
 
 option = st.sidebar.selectbox(
     'Select a mini project',
-     ['line chart','map','T n C'])
+     ['line chart','map','T n C', 'Long Process'])
 
 if option=='line chart':
     chart_data = pd.DataFrame(
@@ -22,7 +23,7 @@ elif option=='map':
 
     st.map(map_data)
 
-else:
+elif option=='T n C':
     st.write('Before you continue, please read the [terms and conditions](https://www.gnu.org/licenses/gpl-3.0.en.html)')
     show = st.checkbox('I agree the terms and conditions')
     if show:
@@ -30,5 +31,17 @@ else:
         'Intplan': ['yes', 'yes', 'yes', 'no'],
         'Churn Status': [0, 0, 0, 1]
         }))
+
+else:
+    'Starting a long computation...'
+    
+    latest_iteration = st.empty()
+    bar = st.progress(0)
+
+    for i in range(100):
+   
+        latest_iteration.text(f'Iteration {i+1}')
+        bar.progress(i + 1)
+        time.sleep(0.1)
         
         
