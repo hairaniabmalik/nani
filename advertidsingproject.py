@@ -28,7 +28,7 @@ df = user_input_features()
 st.subheader('Advertising Input parameters')
 st.write(df)
 
-advertising = datasets.load_iris()
+advertising = datasets.load_('content/advertidsingproject.py')
 X = advertising.data
 Y = advertising.target
 
