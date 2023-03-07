@@ -1,48 +1,35 @@
 import streamlit as st
 import pandas as pd
 from sklearn import datasets
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LinearRegression
 
 st.write("""
 # Advertising Project App
-
-This app predicts the **Advertisement** type!
 """)
 
-st.write('Before you continue, please read the [terms and conditions](https://www.gnu.org/licenses/gpl-3.0.en.html)')
-show = st.checkbox('I agree the terms and conditions')
-if show:
-    st.write(pd.DataFrame({
-    'Intplan': ['yes', 'yes', 'yes', 'no'],
-    'Churn Status': [0, 0, 0, 1]
-
 st.sidebar.header('Advertising method')     
-    option = st.sidebar.selectbox(
-    'Select a mini project',
-    ['TV','Radio','Newspaper','Sales'])
 
 def user_input_features():
     TV = st.sidebar.slider('TV', 1.0, 300.0, 150.0)
     Radio = st.sidebar.slider('Radio', 1.0, 50.0, 25.0)
     Newspaper = st.sidebar.slider('Newspaper', 1.0, 70.0, 35.0)
-    Sales = st.sidebar.slider('Sales', 1.0, 30.0, 15.0)
     data = {'TV': TV,
             'Radio': Radio,
-            'Newspaper': Newspaper,
-            'Sales': Sales}
+            'Newspaper': Newspaper}
     features = pd.DataFrame(data, index=[0])
     return features
 
-df = pd.read_csv('Advertising.csv')
+df = user_input_features()
 
 st.subheader('Advertising Input parameters')
 st.write(df)
 
-advertising = datasets.load_iris()
-X = advertising.data
-Y = advertising.target
+dfdata = pd.read_csv("Advertising.csv")
+dftdata = dfdata.drop(['Unnamed:0'], axis=1)
+X = dfdata.drop(['Sales'],axis=1)
+Y = dfdata.Sales
 
-clf = RandomForestClassifier()
+clf = LinearRegression()
 clf.fit(X, Y)
 
 prediction = clf.predict(df)
