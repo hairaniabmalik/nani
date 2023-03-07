@@ -8,7 +8,7 @@ st.write('Before you continue, please read the [terms and conditions](https://ww
 show = st.checkbox('I agree the terms and conditions')
 
 if show:
-st.write(pd.DataFrame({
+    st.write(pd.DataFrame({
     'Intplan': ['yes', 'yes', 'yes', 'no'],
     'Churn Status': [0, 0, 0, 1]
 }))
