@@ -16,7 +16,7 @@ if show:
     'Intplan': ['yes', 'yes', 'yes', 'no'],
     'Churn Status': [0, 0, 0, 1]
 
-st.sidebar.header('Advertising method')     
+     st.sidebar.header('Advertising method')     
      option = st.sidebar.selectbox(
     'Select a mini project',
      ['TV','Radio','Newspaper','Sales'])
